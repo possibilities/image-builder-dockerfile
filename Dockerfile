@@ -96,8 +96,3 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && apk del .build-deps-yarn
 
 VOLUME ["/root/.config"]
-RUN yarn
-COPY . /app
-WORKDIR /app
-
-CMD yarn start
