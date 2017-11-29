@@ -9,3 +9,4 @@ an opinionated quick and dirty base image for CI pipelines
 * node 8
 * gcloud
 * kubectl
+* nodegit

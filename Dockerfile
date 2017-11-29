@@ -95,4 +95,14 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
   && apk del .build-deps-yarn
 
+# for nodegit
+# copied from https://github.com/Pet3rMatta/nodegit-alpine/blob/master/Dockerfile
+RUN apk update && \
+    apk upgrade && \
+    apk add git libgit2-dev && \
+    apk add python tzdata pkgconfig build-base && \
+    BUILD_ONLY=true npm install --production nodegit
+RUN apk del python tzdata pkgconfig build-base && \
+    rm -rf /tmp/* /var/cache/apk/*
+
 VOLUME ["/root/.config"]
