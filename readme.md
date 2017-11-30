@@ -7,5 +7,5 @@ an opinionated quick and dirty base image for CI pipelines
 * git
 * docker
 * node 8
+* yarn
 * gcloud
-* kubectl

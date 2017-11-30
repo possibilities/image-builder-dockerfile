@@ -1,13 +1,11 @@
 FROM docker:git
 
 # https://github.com/GoogleCloudPlatform/cloud-sdk-docker/blob/master/alpine/Dockerfile
-# https://github.com/lachie83/k8s-kubectl/blob/master/Dockerfile
 # https://github.com/nodejs/docker-node/blob/master/8/alpine/Dockerfile
 
 ENV CLOUD_SDK_VERSION 178.0.0
 ENV NODE_VERSION 8.9.1
 ENV YARN_VERSION 1.3.2
-ENV KUBE_LATEST_VERSION="v1.8.4"
 
 ENV PATH /google-cloud-sdk/bin:$PATH
 RUN apk --no-cache add \
@@ -26,13 +24,6 @@ RUN apk --no-cache add \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image && \
     gcloud --version
-
-RUN apk add --update ca-certificates \
- && apk add --update -t deps curl \
- && curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
- && chmod +x /usr/local/bin/kubectl \
- && apk del --purge deps \
- && rm /var/cache/apk/*
 
 RUN addgroup -g 1000 node \
     && adduser -u 1000 -G node -s /bin/sh -D node \
